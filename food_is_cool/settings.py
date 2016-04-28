@@ -149,8 +149,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication'),
 }
 #
-# CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 # STRIPE_PUBLISHABLE_KEY = os.environ['STRIPE_KEY']
 # STRIPE_SECRET_KEY = os.environ['STRIPE_SECRET_KEY']
