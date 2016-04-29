@@ -33,7 +33,7 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 #     is_truck = models.CharField(max_length=3, null=True)
 
 class TruckProfile(models.Model):
-    user = models.OneToOneField(User, related_name='truck_profile')
+    user = models.ForeignKey(User, related_name='truck_profile')
     truck_name = models.CharField(max_length=255)
     email_address = models.EmailField()
     phone_number = models.CharField(max_length=12)
@@ -48,7 +48,7 @@ class TruckProfile(models.Model):
 # class TruckLocation(models.Model):
 
 class CustomerProfile(models.Model):
-    user = models.OneToOneField(User, related_name='customer_profile')
+    user = models.ForeignKey(User, related_name='customer_profile')
     customer_name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
