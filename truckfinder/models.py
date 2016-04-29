@@ -14,27 +14,36 @@ from django.db import models
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
-        CustomerProfile.objects.create(user=instance)
+        Profile.objects.create(user=instance)
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, null=True, blank=True,
+                                related_name='profile')
+    is_truck = models.NullBooleanField()
+
+    def create_type_profile(self, **kwargs):
+        if self.is_truck==True:
+            TruckProfile.objects.create()
+        if self.is_truck==False:
+            CustomerProfile.objects.create()
 
 class TruckProfile(models.Model):
-    user = models.ForeignKey(User, related_name='truck_profiles')
+    profile = models.ForeignKey(User, related_name='truck_profiles')
     truck_name = models.CharField(max_length=255)
     email_address = models.EmailField()
     phone_number = models.CharField(max_length=12)
     website = models.URLField()
     facebook_page = models.URLField()
     twitter_page = models.URLField()
-    instagram_page = models.URLField
+    instagram_page = models.URLField()
     logo_url = models.URLField()
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
-
 # class TruckLocation(models.Model):
 
-
-class CustomerProfile(models.Model):
-    user = models.ForeignKey(User, related_name='customer_profiles')
+class CustomerProfile(Profile):
+    profile = models.ForeignKey(User, related_name='customer_profiles')
     customer_name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
