@@ -43,7 +43,6 @@ class ListCreateTruckProfile(generics.ListCreateAPIView):
     def get_queryset(self):
         return TruckProfile.objects.filter(user=self.request.user)
 
-
 class DetailUpdateDeleteTruckProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = TruckProfile.objects.all()
     serializer_class = TruckProfileSerializer
