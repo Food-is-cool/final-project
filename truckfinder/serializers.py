@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.models import User
-from truckfinder.models import TruckProfile, CustomerProfile, Address
+from truckfinder.models import TruckProfile, CustomerProfile, Address, Profile
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -14,15 +14,22 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         return user
 
-class TruckProfileSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Profile
+        fields = '__all__'
+
+class TruckProfileSerializer(serializers.ModelSerializer):
+    profile = ProfileSerializer(read_only=True)
 
     class Meta:
         model = TruckProfile
         fields = '__all__'
 
 class CustomerProfileSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
+    profile = ProfileSerializer(read_only=True)
 
     class Meta:
         model = CustomerProfile
