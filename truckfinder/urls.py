@@ -2,7 +2,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 from django.conf.urls import url, include
 from truckfinder.views import ListCreateUser, DetailUpdateDeleteTruckProfile, \
     ListCreateTruckProfile, DetailUpdateDeleteCustomerProfile, \
-    ListCreateCustomerProfile
+    ListCreateCustomerProfile, DetailCurrentTruck, DetailCurrentCustomer
 
 urlpatterns = [
     url(r'^api-token-auth/', obtain_auth_token),
@@ -13,10 +13,14 @@ urlpatterns = [
     #     name='api_profile_detail_update'),
     # url(r'^profiles/$', ListCreateProfile.as_view(),
     #     name='api_profile_list_create'),
+    url(r'^trucks/current/$', DetailCurrentTruck.as_view(),
+        name='api_current_truck'),
     url(r'^trucks/(?P<pk>\d+)$', DetailUpdateDeleteTruckProfile.as_view(),
         name='api_truckprofile_detail_update'),
     url(r'^trucks/$', ListCreateTruckProfile.as_view(),
         name='api_truckprofile_list_create'),
+    url(r'^customers/current/$', DetailCurrentCustomer.as_view(),
+        name='api_current_customer'),
     url(r'^customers/(?P<pk>\d+)$',
         DetailUpdateDeleteCustomerProfile.as_view(),
         name='api_customerprofile_detail_update'),

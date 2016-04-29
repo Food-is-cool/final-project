@@ -43,6 +43,12 @@ class ListCreateTruckProfile(generics.ListCreateAPIView):
     def get_queryset(self):
         return TruckProfile.objects.all()
 
+class DetailCurrentTruck(generics.ListAPIView):
+    serializer_class = TruckProfileSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    def get_queryset(self):
+        return TruckProfile.objects.filter(user=self.request.user)
+
 class DetailUpdateDeleteTruckProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = TruckProfile.objects.all()
     serializer_class = TruckProfileSerializer
@@ -58,6 +64,13 @@ class ListCreateCustomerProfile(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return CustomerProfile.objects.all()
+
+class DetailCurrentCustomer(generics.ListAPIView):
+    serializer_class = CustomerProfileSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+    def get_queryset(self):
+        return CustomerProfile.objects.filter(user=self.request.user)
 
 class DetailUpdateDeleteCustomerProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = CustomerProfile.objects.all()
