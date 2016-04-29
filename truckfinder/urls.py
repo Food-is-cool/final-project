@@ -2,11 +2,14 @@ from rest_framework.authtoken.views import obtain_auth_token
 from django.conf.urls import url, include
 from truckfinder.views import ListCreateUser, DetailUpdateDeleteTruckProfile, \
     ListCreateTruckProfile, DetailUpdateDeleteCustomerProfile, \
-    ListCreateCustomerProfile, DetailCurrentTruck, DetailCurrentCustomer
+    ListCreateCustomerProfile, DetailCurrentTruck, DetailCurrentCustomer, \
+    DetailCurrentUser
 
 urlpatterns = [
     url(r'^api-token-auth/', obtain_auth_token),
     url(r'^docs/', include('rest_framework_swagger.urls')),
+    url(r'^users/current/$', DetailCurrentUser.as_view(),
+        name='api_current_user'),
     url(r'^users/$', ListCreateUser.as_view(),
         name='api_user_list_create'),
     # url(r'^profiles/(?P<pk>\d+)$', DetailUpdateDeleteProfile.as_view(),

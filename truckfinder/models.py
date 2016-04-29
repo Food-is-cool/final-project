@@ -62,7 +62,7 @@ class CustomerProfile(models.Model):
 class Address(models.Model):
     customer_profile = models.ForeignKey(CustomerProfile, related_name='address')
     truck_profile = models.ForeignKey(TruckProfile, related_name='address')
-    street_number = models.TextField()
+    street_address = models.TextField()
     city = models.TextField()
     suite_number = models.TextField(null=True)
     state = models.TextField()

@@ -5,6 +5,7 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=128, write_only=True)
+    is_staff = serializers.BooleanField(read_only=True)
 
     class Meta:
         model = User
@@ -22,8 +23,15 @@ class UserSerializer(serializers.ModelSerializer):
 #         model = Profile
 #         fields = '__all__'
 
+class AddressSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Address
+        fields = '__all__'
+
 class TruckProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
+    #address = AddressSerializer(read_only=True)
 
     class Meta:
         model = TruckProfile
@@ -31,7 +39,9 @@ class TruckProfileSerializer(serializers.ModelSerializer):
 
 class CustomerProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
+    # address = AddressSerializer(read_only=True)
 
     class Meta:
         model = CustomerProfile
         fields = '__all__'
+

@@ -18,6 +18,17 @@ class DetailUser(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class= UserSerializer
 
+class DetailCurrentUser(generics.ListAPIView):
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
+
+    # def get_queryset(self):
+    #     user = self.request.user
+    #     return user
+
 # class ListCreateProfile(generics.ListCreateAPIView):
 #     serializer_class = ProfileSerializer
 #     permission_classes = (IsAuthenticatedOrReadOnly,)

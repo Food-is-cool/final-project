@@ -18,6 +18,6 @@ class CustomerProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
-    list_display = ('id', 'customer_profile', 'truck_profile', 'street_number',
+    list_display = ('id', 'customer_profile', 'truck_profile', 'street_address',
                     'city', 'suite_number', 'state', 'zipcode')
 
