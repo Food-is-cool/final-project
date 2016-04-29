@@ -38,7 +38,7 @@ class TruckProfile(models.Model):
     email_address = models.EmailField()
     phone_number = models.CharField(max_length=12)
     website = models.URLField(null=True)
-    facebook_page = models.URLField(null=True)
+    facebook_page = models.URLField(null=True, blank=True)
     twitter_page = models.URLField(null=True)
     instagram_page = models.URLField(null=True)
     logo_url = models.URLField(null=True)
