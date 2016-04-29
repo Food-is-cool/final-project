@@ -14,21 +14,26 @@ from django.db import models
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
-        Profile.objects.create(user=instance)
+        if instance.is_staff:
+            TruckProfile.objects.create(user=instance)
+        else:
+            CustomerProfile.objects.create(user=instance)
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, null=True, blank=True,
-                                related_name='profile')
-    is_truck = models.NullBooleanField()
 
-    def create_type_profile(self, **kwargs):
-        if self.is_truck==True:
-            TruckProfile.objects.create()
-        if self.is_truck==False:
-            CustomerProfile.objects.create()
+# @receiver(post_save)
+# def create_type_profile(self, **kwargs):
+#     if self.is_truck == True:
+#         TruckProfile.objects.create()
+#     if self.is_truck == False:
+#         CustomerProfile.objects.create()
+
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, null=True, blank=True,
+#                                 related_name='profile')
+#     is_truck = models.CharField(max_length=3, null=True)
 
 class TruckProfile(models.Model):
-    profile = models.ForeignKey(User, related_name='truck_profiles')
+    user = models.OneToOneField(User, related_name='truck_profile')
     truck_name = models.CharField(max_length=255)
     email_address = models.EmailField()
     phone_number = models.CharField(max_length=12)
@@ -42,8 +47,8 @@ class TruckProfile(models.Model):
 
 # class TruckLocation(models.Model):
 
-class CustomerProfile(Profile):
-    profile = models.ForeignKey(User, related_name='customer_profiles')
+class CustomerProfile(models.Model):
+    user = models.OneToOneField(User, related_name='customer_profile')
     customer_name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
