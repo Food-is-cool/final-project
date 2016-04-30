@@ -23,15 +23,15 @@ class UserSerializer(serializers.ModelSerializer):
 #         model = Profile
 #         fields = '__all__'
 
-class AddressSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Address
-        fields = '__all__'
+# class AddressSerializer(serializers.ModelSerializer):
+#
+#     class Meta:
+#         model = Address
+#         fields = '__all__'
 
 class TruckProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
-    #address = AddressSerializer(read_only=True)
+    # address = AddressSerializer(read_only=True)
 
     class Meta:
         model = TruckProfile

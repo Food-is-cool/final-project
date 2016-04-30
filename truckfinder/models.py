@@ -32,6 +32,7 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 #                                 related_name='profile')
 #     is_truck = models.CharField(max_length=3, null=True)
 
+
 class TruckProfile(models.Model):
     user = models.ForeignKey(User, related_name='truck_profile')
     truck_name = models.CharField(max_length=255)
@@ -45,6 +46,8 @@ class TruckProfile(models.Model):
     cuisine = models.CharField(max_length=255, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    # address = models.ForeignKey(Address, null=True, blank=True,
+                                # related_name='truck_profile')
 
 # class TruckLocation(models.Model):
 
@@ -57,14 +60,31 @@ class CustomerProfile(models.Model):
     want_emails = models.BooleanField(default=False)
     email_address = models.EmailField()
     mobile_number = models.CharField(max_length=12)
-    # evening_address
-    # weekend_address
+    street_address = models.CharField(max_length=255, null=True)
+    city = models.CharField(max_length=100, null=True)
+    suite_number = models.CharField(max_length=20, null=True, blank=True)
+    state = models.CharField(max_length=2, null=True)
+    zipcode = models.CharField(max_length=10, null=True)
+    # address = models.ForeignKey(Address, null=True, blank=True,
+    #                           related_name='customer_profile')
 
 class Address(models.Model):
-    customer_profile = models.ForeignKey(CustomerProfile, related_name='address')
-    truck_profile = models.ForeignKey(TruckProfile, related_name='address')
-    street_address = models.TextField()
-    city = models.TextField()
-    suite_number = models.TextField(null=True)
-    state = models.TextField()
-    zipcode = models.TextField()
+    # user = models.ForeignKey(User, related_name='address')
+    # customer_profile = models.ForeignKey(CustomerProfile,
+    #                                      null=True, blank=True,
+    #                                      related_name='address')
+    # truck_profile = models.ForeignKey(TruckProfile, related_name='address')
+    street_address = models.CharField(max_length=255, null=True)
+    city = models.CharField(max_length=100, null=True)
+    suite_number = models.TextField(max_length=20, null=True, blank=True)
+    state = models.CharField(max_length=2, null=True)
+    zipcode = models.CharField(max_length=5, null=True)
+
+    def __unicode__(self):
+        return self.street_address
+
+    def __str__(self):
+        return self.street_address
+
+
+

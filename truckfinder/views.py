@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from truckfinder.models import TruckProfile, CustomerProfile, Address
 from rest_framework import generics
 from truckfinder.serializers import UserSerializer, TruckProfileSerializer, \
-    CustomerProfileSerializer
+    CustomerProfileSerializer #, AddressSerializer
 from django.shortcuts import render
 
 # Create your views here.
@@ -86,4 +86,21 @@ class DetailCurrentCustomer(generics.ListAPIView):
 class DetailUpdateDeleteCustomerProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = CustomerProfile.objects.all()
     serializer_class = CustomerProfileSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    # permission_classes = (IsOwnerOrReadOnly,)
+
+
+# class ListCreateAddress(generics.ListCreateAPIView):
+#     serializer_class = AddressSerializer
+#     queryset = Address.objects.all()
+#     #permission_classes = (IsAuthenticatedOrReadOnly,)
+#
+#     def perform_create(self, serializer):
+#         serializer.save()
+#
+#     # def get_queryset(self):
+#     #     return Address.objects.all()
+#
+# class DetailUpdateDeleteAddress(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Address.objects.all()
+#     serializer_class = AddressSerializer
+#     #permission_classes = (IsOwnerOrReadOnly,)

@@ -3,7 +3,7 @@ from django.conf.urls import url, include
 from truckfinder.views import ListCreateUser, DetailUpdateDeleteTruckProfile, \
     ListCreateTruckProfile, DetailUpdateDeleteCustomerProfile, \
     ListCreateCustomerProfile, DetailCurrentTruck, DetailCurrentCustomer, \
-    DetailCurrentUser
+    DetailCurrentUser #, ListCreateAddress, DetailUpdateDeleteAddresd
 
 urlpatterns = [
     url(r'^api-token-auth/', obtain_auth_token),
@@ -28,5 +28,10 @@ urlpatterns = [
         DetailUpdateDeleteCustomerProfile.as_view(),
         name='api_customerprofile_detail_update'),
     url(r'^customers/$', ListCreateCustomerProfile.as_view(),
-        name='api_customerprofile_list_create')
+        name='api_customerprofile_list_create')#,
+    # url(r'^addresses/(?P<pk>\d+)$',
+    #     DetailUpdateDeleteAddress.as_view(),
+    #     name='api_address_detail_update'),
+    # url(r'^addresses/$', ListCreateAddress.as_view(),
+    #     name='api_address_list_create')
 ]
