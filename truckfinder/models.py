@@ -35,15 +35,16 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 
 class TruckProfile(models.Model):
     user = models.ForeignKey(User, related_name='truck_profile')
-    truck_name = models.CharField(max_length=255)
-    email_address = models.EmailField()
-    phone_number = models.CharField(max_length=12)
-    website = models.URLField(null=True)
+    truck_name = models.CharField(max_length=255, null=True, blank=True)
+    truck_description = models.TextField(null=True, blank=True)
+    email_address = models.EmailField(null=True, blank=True)
+    phone_number = models.CharField(max_length=12, null=True, blank=True)
+    website = models.URLField(null=True, blank=True)
     facebook_page = models.URLField(null=True, blank=True)
-    twitter_page = models.URLField(null=True)
-    instagram_page = models.URLField(null=True)
-    logo_url = models.URLField(null=True)
-    cuisine = models.CharField(max_length=255, null=True)
+    twitter_page = models.URLField(null=True, blank=True)
+    instagram_page = models.URLField(null=True, blank=True)
+    logo_url = models.URLField(null=True, blank=True)
+    cuisine = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     # address = models.ForeignKey(Address, null=True, blank=True,
@@ -53,7 +54,7 @@ class TruckProfile(models.Model):
 
 class CustomerProfile(models.Model):
     user = models.ForeignKey(User, related_name='customer_profile')
-    customer_name = models.CharField(max_length=255)
+    customer_name = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     want_texts= models.BooleanField(default=False)
