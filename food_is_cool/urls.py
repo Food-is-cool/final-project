@@ -22,11 +22,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url('^register/', CreateView.as_view(template_name='register.html',
-                                         form_class=UserCreationForm,
-                                         success_url='/'
-    )),
-url(r'^api-token-auth/', obtain_auth_token),
+    url(r'^api-token-auth/', obtain_auth_token),
     url(r'^api/', include('mainsite.urls_api')),
     url(r'^docs/', include('rest_framework_swagger.urls')),
     url('^', include('django.contrib.auth.urls')),
