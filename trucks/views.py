@@ -27,4 +27,4 @@ class DetailUpdateDeleteTruckProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = TruckProfile.objects.all()
     serializer_class = TruckProfileSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    #TODO: change this ^ back to IsOwnerOrReadOnly
+    # TODO: change this ^ back to IsOwnerOrReadOnly
