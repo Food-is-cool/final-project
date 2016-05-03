@@ -8,8 +8,9 @@ from mainsite.models import Profile
 
 @receiver(post_save, sender=Profile)
 def create_customer_profile(sender, instance=None, created=False, **kwargs):
-    if instance.is_truck == False:
-        CustomerProfile.objects.create(profile=instance)
+    if created:
+        if instance.is_truck == False:
+            CustomerProfile.objects.create(profile=instance)
 
 class CustomerProfile(models.Model):
     profile = models.OneToOneField(Profile, related_name='customer_profile')

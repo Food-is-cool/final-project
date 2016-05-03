@@ -9,8 +9,9 @@ from mainsite.models import Profile
 
 @receiver(post_save, sender=Profile)
 def create_truck_profile(sender, instance=None, created=False, **kwargs):
-    if instance.is_truck == True:
-        TruckProfile.objects.create(profile=instance)
+    if created:
+        if instance.is_truck == True:
+            TruckProfile.objects.create(profile=instance)
 
 class TruckProfile(models.Model):
     profile = models.OneToOneField(Profile, related_name='truck_profile')
