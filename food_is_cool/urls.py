@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from rest_framework.authtoken.views import obtain_auth_token
+from mainsite.views import ListCreateUser, DetailCurrentUser, ListGroups
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include('truckfinder.urls')),
+    url(r'^api-token-auth/', obtain_auth_token),
+    url(r'^api/', include('mainsite.urls_api')),
+    url(r'^docs/', include('rest_framework_swagger.urls')),
     url('^', include('django.contrib.auth.urls')),
 ]

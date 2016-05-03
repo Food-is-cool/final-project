@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_swagger',
     'corsheaders',
-    'truckfinder'
+    'trucks',
+    'customers',
+    'mainsite'
 ]
 
 MIDDLEWARE_CLASSES = [
