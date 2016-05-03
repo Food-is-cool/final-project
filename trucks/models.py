@@ -9,17 +9,16 @@ from mainsite.models import Profile
 
 
 @receiver(post_save, sender=Profile)
-def create_truck_profile(sender, instance=None, created=False, **kwargs):
+def create_type_profile(sender, instance=None, created=False, **kwargs):
     if instance.is_truck == True:
         TruckProfile.objects.create(profile=instance)
-
 
 class TruckProfile(models.Model):
     profile = models.OneToOneField(Profile, related_name='truck_profile')
     truck_name = models.CharField(max_length=255, null=True, blank=True)
     truck_description = models.TextField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
-    latitutde = models.FloatField(null=True, blank=True)
+    latitude = models.FloatField(null=True, blank=True)
     expiration = models.DateTimeField(null=True, blank=True)
     email_address = models.EmailField(null=True, blank=True)
     phone_number = models.CharField(max_length=12, null=True, blank=True)
