@@ -5,8 +5,28 @@ from mainsite.models import Profile
 from trucks.models import TruckProfile
 
 
+class GroupSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Group
+        fields = '__all__'
+
+class ProfileSerializer(serializers.ModelSerializer):
+    # is_truck = serializers.BooleanField(write_only=True)
+
+    class Meta:
+        model = Profile
+        fields = ('id', 'user', 'is_truck',)
+
+    # def perform_create(self, validated_data):
+    #     if validated_data['is_truck']==True:
+    #         TruckProfile.objects.create(user=self.request.user)
+    #     else:
+    #         CustomerProfile.objects.create(user=self.request.user)
+
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=128, write_only=True)
+    profile = ProfileSerializer(read_only=True)
 
     class Meta:
         model = User
@@ -15,30 +35,6 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
-
-class GroupSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Group
-        fields = '__all__'
-
-class ProfileSerializer(serializers.ModelSerializer):
-    is_truck = serializers.BooleanField(write_only=True)
-
-    class Meta:
-        model = Profile
-        fields = '__all__'
-
-    # def perform_create(self, validated_data):
-    #     if validated_data['is_truck']==True:
-    #         TruckProfile.objects.create(user=self.request.user)
-    #     else:
-    #         CustomerProfile.objects.create(user=self.request.user)
-
-
-
-
-
 
 
 # class UserSerializer(serializers.ModelSerializer):
