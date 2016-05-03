@@ -31,30 +31,3 @@ class TruckProfile(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
 
 
-
-# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-# def create_auth_token(sender, instance=None, created=False, **kwargs):
-#     if created:
-#         Token.objects.create(user=instance)
-
-# @receiver(post_save, sender=User)
-# def create_truck_profile(sender, instance=None, created=False, **kwargs):
-#     Group.objects.get(name='trucks')
-#     if created:
-#         TruckProfile.objects.create(user=instance)
-
-        # instance.groups.filter(Group.objects.get(name='trucks'))
-        # TruckProfile.objects.create(user=instance)
-
-# if instance.groups.filter(name='trucks').exists():
-#     TruckProfile.objects.create(user=instance)
-
-# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-# def create_truck_profile(sender, instance=None, created=False, **kwargs):
-#     if created:
-#         if instance.groups.filter(name='trucks').exists():
-#             TruckProfile.objects.create(user=instance)
-#         else:
-#             CustomerProfile.objects.create(user=instance)
-
-
