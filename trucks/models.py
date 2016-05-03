@@ -4,16 +4,10 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User, Group
 from django.db import models
-from mainsite.models import Profile
 
-
-@receiver(post_save, sender=Profile)
-def create_truck_profile(sender, instance=None, created=False, **kwargs):
-    if instance.is_truck == True:
-        TruckProfile.objects.create(profile=instance)
 
 class TruckProfile(models.Model):
-    profile = models.OneToOneField(Profile, related_name='truck_profile')
+    user = models.OneToOneField(User, related_name='truck_profile')
     truck_name = models.CharField(max_length=255, null=True, blank=True)
     truck_description = models.TextField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
@@ -31,3 +25,9 @@ class TruckProfile(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
 
 
+
+
+# @receiver(post_save, sender=Profile)
+# def create_truck_profile(sender, instance=None, created=False, **kwargs):
+#     if instance.is_truck == True:
+#         TruckProfile.objects.create(profile=instance)

@@ -1,9 +1,23 @@
+from customers.models import CustomerProfile
 from mainsite.permissions import IsOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from django.contrib.auth.models import User
-from customers.models import CustomerProfile
+from django.contrib.auth.models import User, Group
+# from customers.models import CustomerProfile
 from rest_framework import generics
-from customers.serializers import CustomerProfileSerializer
+from customers.serializers import CustomerProfileSerializer, \
+    CustomerUserSerializer
+
+
+class CreateCustomerUser(generics.CreateAPIView):
+    queryset=User.objects.all()
+    serializer_class = CustomerUserSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
+        user = serializer.instance
+        g = Group.objects.get(name='customers')
+        g.user_set.add(user)
+        CustomerProfile.objects.create(user=user)
 
 class ListCreateCustomerProfile(generics.ListCreateAPIView):
     serializer_class = CustomerProfileSerializer
@@ -14,7 +28,6 @@ class ListCreateCustomerProfile(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return CustomerProfile.objects.all()
-
 
 class DetailCurrentCustomer(generics.ListAPIView):
     serializer_class = CustomerProfileSerializer

@@ -4,15 +4,9 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User, Group
 from django.db import models
-from mainsite.models import Profile
-
-@receiver(post_save, sender=Profile)
-def create_customer_profile(sender, instance=None, created=False, **kwargs):
-    if instance.is_truck == False:
-        CustomerProfile.objects.create(profile=instance)
 
 class CustomerProfile(models.Model):
-    profile = models.OneToOneField(Profile, related_name='customer_profile')
+    user = models.OneToOneField(User, related_name='customer_profile')
     customer_name = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
@@ -25,3 +19,8 @@ class CustomerProfile(models.Model):
     suite_number = models.CharField(max_length=20, null=True, blank=True)
     state = models.CharField(max_length=2, null=True, blank=True)
     zipcode = models.CharField(max_length=10, null=True, blank=True)
+
+# @receiver(post_save, sender=Profile)
+# def create_customer_profile(sender, instance=None, created=False, **kwargs):
+#     if instance.is_truck == False:
+#         CustomerProfile.objects.create(profile=instance)

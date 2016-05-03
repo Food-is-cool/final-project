@@ -10,11 +10,11 @@ from django.db import models
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
-        Profile.objects.create(user=instance)
+        # Profile.objects.create(user=instance)
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, related_name='profiles')
-    is_truck = models.NullBooleanField(null=True, blank=True)
-
-    def __str__(self):
-        return self.user.username
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, related_name='profiles')
+#     is_truck = models.NullBooleanField(null=True, blank=True, default=None)
+#
+#     def __str__(self):
+#         return self.user.username
