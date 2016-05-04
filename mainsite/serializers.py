@@ -31,8 +31,8 @@ class GroupSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=128, write_only=True)
-    truck_is_truck = serializers.NullBooleanField(source='TruckProfile.is_truck')
-    customer_is_truck = serializers.NullBooleanField(source='CustomerProfile.is_truck')
+    # truck_is_truck = serializers.NullBooleanField(source='TruckProfile.is_truck')
+    # customer_is_truck = serializers.NullBooleanField(source='CustomerProfile.is_truck')
     # profile = ProfileSerializer(read_only=True)
     # is_truck = serializers.NullBooleanField(source='profile.is_truck')
 

@@ -7,7 +7,6 @@ from rest_framework import generics
 from customers.serializers import CustomerProfileSerializer, \
     CustomerUserSerializer
 
-
 class CreateCustomerUser(generics.CreateAPIView):
     queryset=User.objects.all()
     serializer_class = CustomerUserSerializer
@@ -34,7 +33,7 @@ class DetailCurrentCustomer(generics.ListAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get_queryset(self):
-        return CustomerProfile.objects.filter(id=self.request.CustomerProfile.id)
+        return CustomerProfile.objects.filter(id=self.request.customerprofile.id)
 
 class DetailUpdateDeleteCustomerProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = CustomerProfile.objects.all()
