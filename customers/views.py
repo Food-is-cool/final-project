@@ -18,6 +18,13 @@ class CreateCustomerUser(generics.CreateAPIView):
         g.user_set.add(user)
         CustomerProfile.objects.create(user=user)
 
+class DetailCurrentCustomerUser(generics.ListAPIView):
+    serializer_class = CustomerUserSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+    def get_queryset(self):
+        return CustomerProfile.objects.filter(id=self.request.user.id)
+
 class ListCreateCustomerProfile(generics.ListCreateAPIView):
     serializer_class = CustomerProfileSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
