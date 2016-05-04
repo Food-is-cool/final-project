@@ -1,5 +1,4 @@
 import os
-
 from customers.models import CustomerProfile
 from mainsite.permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User, Group
@@ -7,7 +6,6 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework import generics
 from trucks.models import TruckProfile
 from trucks.serializers import TruckProfileSerializer, TruckUserSerializer
-
 
 class ListCreateTruckUser(generics.ListCreateAPIView):
     queryset=User.objects.all()
@@ -35,7 +33,7 @@ class DetailCurrentTruck(generics.ListAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get_queryset(self):
-        return TruckProfile.objects.filter(id=self.request.TruckProfile.id)
+        return TruckProfile.objects.filter(id=self.request.user.id)
 
 class DetailUpdateDeleteTruckProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = TruckProfile.objects.all()

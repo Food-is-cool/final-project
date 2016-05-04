@@ -6,7 +6,7 @@ from customers.views import DetailUpdateDeleteCustomerProfile, DetailCurrentCust
 
 urlpatterns = [
     url(r'^users/$', CreateCustomerUser.as_view(),
-       name='api_createtruck_user'),
+       name='api_createcustomer_user'),
     url(r'^users/current/$', DetailCurrentCustomer.as_view(),
         name='api_current_customer'),
     url(r'^users/(?P<pk>\d+)$',
