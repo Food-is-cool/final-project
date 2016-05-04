@@ -14,7 +14,7 @@ class CustomerProfileSerializer(serializers.ModelSerializer):
 
 class CustomerUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=128, write_only=True)
-    customer_profile = CustomerProfileSerializer()
+    customer_profile = CustomerProfileSerializer(read_only=True)
 
     class Meta:
         model = User

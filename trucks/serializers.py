@@ -15,7 +15,7 @@ class TruckProfileSerializer(serializers.ModelSerializer):
 
 class TruckUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=128, write_only=True)
-    truck_profile = TruckProfileSerializer()
+    truck_profile = TruckProfileSerializer(read_only=True)
 
     class Meta:
         model = User
