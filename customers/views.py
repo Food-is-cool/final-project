@@ -1,5 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-
+# from django.contrib.auth.mixins import LoginRequiredMixin
 from customers.models import CustomerProfile
 from mainsite.permissions import IsOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
