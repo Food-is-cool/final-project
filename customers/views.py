@@ -34,7 +34,7 @@ class DetailCurrentCustomer(generics.ListAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get_queryset(self):
-        return CustomerProfile.objects.filter(id=self.request.user.id)
+        return CustomerProfile.objects.filter(id=self.request.CustomerProfile.id)
 
 class DetailUpdateDeleteCustomerProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = CustomerProfile.objects.all()

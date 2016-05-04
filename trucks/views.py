@@ -35,7 +35,7 @@ class DetailCurrentTruck(generics.ListAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get_queryset(self):
-        return TruckProfile.objects.filter(id=self.request.user.id)
+        return TruckProfile.objects.filter(id=self.request.TruckProfile.id)
 
 class DetailUpdateDeleteTruckProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = TruckProfile.objects.all()

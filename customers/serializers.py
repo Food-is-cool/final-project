@@ -3,7 +3,6 @@ from customers.models import CustomerProfile
 from rest_framework import serializers
 from mainsite.serializers import UserSerializer
 
-
 class CustomerUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=128, write_only=True)
 
