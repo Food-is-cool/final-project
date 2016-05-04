@@ -1,7 +1,6 @@
 import os
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-
 from customers.models import CustomerProfile
 from mainsite.permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User, Group
