@@ -37,7 +37,7 @@ class ListCreateTruckProfile(generics.ListCreateAPIView):
     def get_queryset(self):
         return TruckProfile.objects.all()
 
-class DetailCurrentTruck(LoginRequiredMixin, generics.ListAPIView):
+class DetailCurrentTruck(generics.ListAPIView):
     serializer_class = TruckProfileSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
