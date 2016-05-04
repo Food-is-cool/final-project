@@ -8,6 +8,7 @@ from django.db import models
 
 class TruckProfile(models.Model):
     user = models.OneToOneField(User, related_name='truck_profile')
+    is_truck = models.BooleanField(default=True)
     truck_name = models.CharField(max_length=255, null=True, blank=True)
     truck_description = models.TextField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
@@ -23,7 +24,6 @@ class TruckProfile(models.Model):
     cuisine = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
-
 
 
 
