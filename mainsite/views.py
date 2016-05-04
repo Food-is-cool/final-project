@@ -5,10 +5,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from mainsite.serializers import UserSerializer, GroupSerializer
 
 
-
-
-
-# =================   User Views ==================== #
+# ================   User Views ==================== #
 
 class DetailUser(generics.RetrieveAPIView):
     queryset = User.objects.all()
@@ -22,6 +19,7 @@ class DetailCurrentUser(generics.ListAPIView):
         return User.objects.filter(id=self.request.user.id)
 
 # =================   Group View ==================== #
+
 class ListGroups(generics.ListCreateAPIView):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer

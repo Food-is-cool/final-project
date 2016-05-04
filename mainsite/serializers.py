@@ -31,14 +31,15 @@ class GroupSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=128, write_only=True)
-    # truck_is_truck = serializers.NullBooleanField(source='TruckProfile.is_truck')
+    is_truck = serializers.NullBooleanField(source='truck_profile.is_truck')
+    is_truck1 = serializers.NullBooleanField(source='customer_profile.is_truck')
     # customer_is_truck = serializers.NullBooleanField(source='CustomerProfile.is_truck')
     # profile = ProfileSerializer(read_only=True)
     # is_truck = serializers.NullBooleanField(source='profile.is_truck')
 
     class Meta:
         model = User
-        fields = ('id','username', 'password')
+        fields = ('id','username', 'password', 'is_truck', 'is_truck1')
 
     def create(self, validated_data):
         user = User.objects.create(**validated_data)

@@ -1,3 +1,5 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from customers.models import CustomerProfile
 from mainsite.permissions import IsOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -18,12 +20,19 @@ class CreateCustomerUser(generics.CreateAPIView):
         g.user_set.add(user)
         CustomerProfile.objects.create(user=user)
 
-class DetailCurrentCustomerUser(generics.ListAPIView):
-    serializer_class = CustomerUserSerializer
+# class DetailCurrentCustomerUser(generics.ListAPIView):
+#     serializer_class = CustomerUserSerializer
+#     permission_classes = (IsAuthenticatedOrReadOnly,)
+#
+#     def get_queryset(self):
+#         return User.objects.filter(id=self.request.user.id)
+
+class DetailCurrentCustomer(LoginRequiredMixin, generics.ListAPIView):
+    serializer_class = CustomerProfileSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get_queryset(self):
-        return User.objects.filter(id=self.request.user.id)
+        return CustomerProfile.objects.filter(user=self.request.user)
 
 class ListCreateCustomerProfile(generics.ListCreateAPIView):
     serializer_class = CustomerProfileSerializer
@@ -35,12 +44,12 @@ class ListCreateCustomerProfile(generics.ListCreateAPIView):
     def get_queryset(self):
         return CustomerProfile.objects.all()
 
-class DetailCurrentCustomer(generics.ListAPIView):
-    serializer_class = CustomerProfileSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-
-    def get_queryset(self):
-        return CustomerProfile.objects.filter(id=self.request.user.id)
+# class DetailCurrentCustomer(generics.ListAPIView):
+#     serializer_class = CustomerProfileSerializer
+#     permission_classes = (IsAuthenticatedOrReadOnly,)
+#
+#     def get_queryset(self):
+#         return CustomerProfile.objects.filter(id=self.request.user.id)
 
 class DetailUpdateDeleteCustomerProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = CustomerProfile.objects.all()

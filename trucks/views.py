@@ -1,4 +1,7 @@
 import os
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from customers.models import CustomerProfile
 from mainsite.permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User, Group
@@ -35,12 +38,19 @@ class ListCreateTruckProfile(generics.ListCreateAPIView):
     def get_queryset(self):
         return TruckProfile.objects.all()
 
-class DetailCurrentTruck(generics.ListAPIView):
+class DetailCurrentTruck(LoginRequiredMixin, generics.ListAPIView):
     serializer_class = TruckProfileSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get_queryset(self):
-        return TruckProfile.objects.filter(id=self.request.user.id)
+        return TruckProfile.objects.filter(user=self.request.user)
+
+# class DetailCurrentTruck(generics.ListAPIView):
+#     serializer_class = TruckProfileSerializer
+#     permission_classes = (IsAuthenticatedOrReadOnly,)
+#
+#     def get_queryset(self):
+#         return TruckProfile.objects.filter(id=self.request.user.id)
 
 class DetailUpdateDeleteTruckProfile(generics.RetrieveUpdateDestroyAPIView):
     queryset = TruckProfile.objects.all()
