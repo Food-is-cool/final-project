@@ -1,11 +1,11 @@
 from django.conf.urls import url
-from trucks.views import DetailCurrentTruck, ListCreateTruckUser,\
-    ListCreateTruckProfile, DetailUpdateDeleteTruckProfile
+from trucks.views import ListCreateTruckUser, ListCreateTruckProfile, DetailUpdateDeleteTruckProfile, \
+    DetailCurrentTruckUser
 
 urlpatterns = [
     url(r'^users/$', ListCreateTruckUser.as_view(),
         name='api_createtruck_user'),
-    url(r'^users/current/$', DetailCurrentTruck.as_view(),
+    url(r'^users/current/$', DetailCurrentTruckUser.as_view(),
         name='api_current_truck'),
     url(r'^users/(?P<pk>\d+)$', DetailUpdateDeleteTruckProfile.as_view(),
         name='api_truckprofile_detail_update'),

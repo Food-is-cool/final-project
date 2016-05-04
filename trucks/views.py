@@ -18,6 +18,13 @@ class ListCreateTruckUser(generics.ListCreateAPIView):
         g.user_set.add(user)
         TruckProfile.objects.create(user=user)
 
+class DetailCurrentTruckUser(generics.ListAPIView):
+    serializer_class = TruckUserSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
+
 class ListCreateTruckProfile(generics.ListCreateAPIView):
     serializer_class = TruckProfileSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
