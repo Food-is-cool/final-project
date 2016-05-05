@@ -20,8 +20,3 @@ class CustomerProfile(models.Model):
     suite_number = models.CharField(max_length=20, null=True, blank=True)
     state = models.CharField(max_length=2, null=True, blank=True)
     zipcode = models.CharField(max_length=10, null=True, blank=True)
-
-# @receiver(post_save, sender=Profile)
-# def create_customer_profile(sender, instance=None, created=False, **kwargs):
-#     if instance.is_truck == False:
-#         CustomerProfile.objects.create(profile=instance)

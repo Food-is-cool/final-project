@@ -4,7 +4,7 @@ from trucks.views import ListCreateTruckUser, ListCreateTruckProfile, \
 
 urlpatterns = [
     url(r'^users/$', ListCreateTruckUser.as_view(),
-        name='api_create_truckuser'),
+        name='api_listcreate_truckuser'),
     url(r'^users/current/$', DetailCurrentTruck.as_view(),
         name='api_current_truck'),
     url(r'^users/(?P<pk>\d+)$', DetailUpdateDeleteTruckProfile.as_view(),

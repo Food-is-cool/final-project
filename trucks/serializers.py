@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib.auth.models import User
 from mainsite.serializers import UserSerializer
 from trucks.models import TruckProfile
@@ -24,3 +23,5 @@ class TruckUserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+
+

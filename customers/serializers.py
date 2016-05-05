@@ -3,7 +3,6 @@ from customers.models import CustomerProfile
 from rest_framework import serializers
 from mainsite.serializers import UserSerializer
 
-
 class CustomerProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     is_truck = serializers.NullBooleanField(default=False),
@@ -20,6 +19,6 @@ class CustomerUserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
-        def create(self, validated_data):
-            user = User.objects.create_user(**validated_data)
-            return user
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user

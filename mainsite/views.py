@@ -18,22 +18,8 @@ class DetailCurrentUser(generics.ListAPIView):
     def get_queryset(self):
         return User.objects.filter(id=self.request.user.id)
 
-# =================   Group View ==================== #
+# =================  Group View ==================== #
 
 class ListGroups(generics.ListCreateAPIView):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-
-
-# =================   Profile Views ==================== #
-
-# class ListCreateProfile(generics.ListCreateAPIView):
-#     queryset=Profile.objects.all()
-#     serializer_class = ProfileSerializer
-#
-#     def perform_create(self, serializer):
-#         serializer.save()
-#
-# class DetailProfile(generics.RetrieveAPIView):
-#     queryset = Profile.objects.all()
-#     serializer_class= ProfileSerializer
