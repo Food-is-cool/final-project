@@ -18,12 +18,13 @@ from django.contrib import admin
 from rest_framework.authtoken.views import obtain_auth_token
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
-
+from twilio.rest.resources import notifications
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-token-auth/', obtain_auth_token),
     url(r'^api/', include('mainsite.urls_api')),
     url(r'^docs/', include('rest_framework_swagger.urls')),
+    # url(r'^notifications/', include('notifications.urls')),
     url('^', include('django.contrib.auth.urls')),
 ]

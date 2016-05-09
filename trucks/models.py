@@ -18,5 +18,6 @@ class TruckProfile(models.Model):
     instagram_page = models.URLField(null=True, blank=True)
     logo_url = models.URLField(null=True, blank=True)
     cuisine = models.CharField(max_length=255, null=True, blank=True)
+    specials = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import sendgrid
 
 from django.core.urlresolvers import reverse_lazy
 
@@ -47,7 +48,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'trucks',
     'customers',
-    'mainsite'
+    'mainsite',
+    #'notifications',
+    'django_twilio'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -156,3 +159,14 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 # STRIPE_PUBLISHABLE_KEY = os.environ['STRIPE_KEY']
 # STRIPE_SECRET_KEY = os.environ['STRIPE_SECRET_KEY']
+
+# ================= FOR SENDGRID ===================== #
+
+# EMAIL_BACKEND = "sgbackend.SendGridBackend"
+# SENDGRID_API_KEY = os.environ['SENDGRID_API_KEY']
+#
+#  ================== FOR TWILIO ====================== #
+#
+# TWILIO_ACCOUNT_SID= os.environ['TWILIO_ACCOUNT_SID']
+# TWILIO_AUTH_TOKEN= os.environ['TWILIO_AUTH_TOKEN']
+# TWILIO_DEFAULT_CALLERID = 'Food is Cool'
