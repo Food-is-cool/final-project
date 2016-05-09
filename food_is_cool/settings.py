@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'customers',
     'mainsite',
     #'notifications',
-    'django_twilio'
+    #'django_twilio'
 ]
 
 MIDDLEWARE_CLASSES = [
