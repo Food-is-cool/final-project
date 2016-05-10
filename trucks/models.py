@@ -23,5 +23,5 @@ class TruckProfile(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user.id
+        return str(self.user.id)
 
