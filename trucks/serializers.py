@@ -12,6 +12,10 @@ class TruckProfileSerializer(serializers.ModelSerializer):
         model = TruckProfile
         fields = '__all__'
 
+
+# class TruckLocationSerializer(ser)
+# truck id, lat, long
+
 class TruckUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=128, write_only=True)
     truck_profile = TruckProfileSerializer(read_only=True)

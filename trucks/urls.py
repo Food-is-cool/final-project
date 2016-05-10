@@ -11,4 +11,6 @@ urlpatterns = [
         name='api_truckprofile_detail_update'),
     url(r'^$', ListCreateTruckProfile.as_view(),
         name='api_truckprofile_list_create')
+
+
 ]

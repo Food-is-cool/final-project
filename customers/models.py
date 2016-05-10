@@ -7,8 +7,11 @@ from django.db import models
 # from notifications.models import SMSNotifications, EmailBlasts
 
 
+
 class CustomerProfile(models.Model):
     user = models.OneToOneField(User, related_name='customer_profile')
+    liked_trucks = models.ManyToManyField('trucks.TruckProfile',
+                                          blank=True)
     is_truck = models.BooleanField(default=False)
     customer_name = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

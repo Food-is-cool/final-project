@@ -1,9 +1,12 @@
+from django.http import HttpResponse
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.contrib.auth.models import User, Group
 from customers.models import CustomerProfile
 from rest_framework import generics
 from customers.serializers import CustomerProfileSerializer, \
     CustomerUserSerializer
+from trucks.models import TruckProfile
+
 
 class CreateCustomerUser(generics.CreateAPIView):
     model = User
@@ -39,6 +42,15 @@ class DetailUpdateDeleteCustomerProfile(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     #TODO: change this back to "IsOwnerorReadOnly"
 
+def like_truck(request, truck_id):
+    truck = TruckProfile.objects.get(id=truck_id)
+    request.user.customer_profile.liked_truck.add(truck)
+    return HttpResponse('ok')
+
+def unlike_truck(request, truck_id):
+    truck = TruckProfile.objects.get(id=truck_id)
+    request.user.customer_profile.liked_truck.remove(truck)
+    return HttpResponse('ok')
 
 
 

@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User, Group
+from django.http import HttpResponse
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework import generics
+from rest_framework.views import APIView
+
 from trucks.models import TruckProfile
 from trucks.serializers import TruckProfileSerializer, TruckUserSerializer
 
@@ -44,6 +47,7 @@ class DetailUpdateDeleteTruckProfile(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TruckProfileSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
     # TODO: change this ^ back to IsOwnerOrReadOnly
+
 
 
 # class DetailCurrentTruck(generics.ListAPIView):
