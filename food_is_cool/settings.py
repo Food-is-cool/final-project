@@ -162,12 +162,12 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 # ================= FOR SENDGRID ===================== #
 
-# EMAIL_BACKEND = "sgbackend.SendGridBackend"
-# SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
-# #
-# #  ================== FOR TWILIO ====================== #
-#
-#
-# TWILIO_ACCOUNT_SID= os.environ.get('TWILIO_ACCOUNT_SID')
-# TWILIO_AUTH_TOKEN= os.environ.get('TWILIO_AUTH_TOKEN')
-# TWILIO_DEFAULT_CALLERID = 'Food is Cool'
+EMAIL_BACKEND = "sgbackend.SendGridBackend"
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+
+#  ================== FOR TWILIO ====================== #
+
+
+TWILIO_ACCOUNT_SID= os.environ.get('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN= os.environ.get('TWILIO_AUTH_TOKEN')
+TWILIO_DEFAULT_CALLERID = 'Food is Cool'
