@@ -28,4 +28,5 @@ class CustomerProfile(models.Model):
     state = models.CharField(max_length=2, null=True, blank=True)
     zipcode = models.CharField(max_length=10, null=True, blank=True)
 
-
+    def __str__(self):
+        return str(self.user.id) + " " + str(self.customer_name)
