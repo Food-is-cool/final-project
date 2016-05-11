@@ -4,7 +4,7 @@ from django.conf.urls import url, include
 from customers import views
 from customers.views import DetailUpdateDeleteCustomerProfile, \
     ListCreateCustomerProfile, CreateCustomerUser, \
-    DetailCurrentCustomer
+    DetailCurrentCustomer, UpdateLikedTrucks
 
 urlpatterns = [
     url(r'^users/$', CreateCustomerUser.as_view(),
@@ -14,8 +14,11 @@ urlpatterns = [
     url(r'^users/(?P<pk>\d+)$',
         DetailUpdateDeleteCustomerProfile.as_view(),
         name='api_customerprofile_detail_update'),
-    url(r'^users/liketruck/$', views.like_truck),
-    url(r'^users/unliketruck/$', views.unlike_truck),
+    url(r'^users/liketruck/$', UpdateLikedTrucks.as_view(),
+        name='api_liketruck'),
     url(r'^$', ListCreateCustomerProfile.as_view(),
         name='api_customerprofile_list_create')
 ]
+
+
+# url(r'^users/liketruck/$', UpdateLikedTrucks.as_view()),

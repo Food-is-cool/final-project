@@ -1,10 +1,12 @@
-from django.http import HttpResponse
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
 from django.contrib.auth.models import User, Group
+from rest_framework.views import APIView
+
 from customers.models import CustomerProfile
 from rest_framework import generics
 from customers.serializers import CustomerProfileSerializer, \
-    CustomerUserSerializer
+    CustomerUserSerializer, LikedTruckSerializer
 from trucks.models import TruckProfile
 
 
@@ -42,15 +44,23 @@ class DetailUpdateDeleteCustomerProfile(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     #TODO: change this back to "IsOwnerorReadOnly"
 
-def like_truck(request, truck_id):
-    truck = TruckProfile.objects.get(id=truck_id)
-    request.user.customer_profile.liked_truck.add(truck)
-    return HttpResponse('ok')
 
-def unlike_truck(request, truck_id):
-    truck = TruckProfile.objects.get(id=truck_id)
-    request.user.customer_profile.liked_truck.remove(truck)
-    return HttpResponse('ok')
+class UpdateLikedTrucks(APIView):
+
+    def patch(self, request, format=None):
+        user = self.request.user
+        serializer = LikedTruckSerializer(user, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save(truck_id=request.data["truck_id"],
+                            liked=request.data['liked'])
+            return Response(serializer.data)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
 
 
 
