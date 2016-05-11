@@ -25,6 +25,6 @@ urlpatterns = [
     url(r'^api-token-auth/', obtain_auth_token),
     url(r'^api/', include('mainsite.urls_api')),
     url(r'^docs/', include('rest_framework_swagger.urls')),
-    # url(r'^notifications/', include('notifications.urls')),
+    url(r'^notifications/', include('notifications.urls')),
     url('^', include('django.contrib.auth.urls')),
 ]

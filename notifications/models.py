@@ -10,6 +10,7 @@ from customers.models import CustomerProfile
 class SMSNotifications(models.Model):
     text_content = models.TextField(max_length=160, null=True, blank=True)
     media_url = models.CharField(max_length=255, null=True, blank=True)
+    city = models.CharField(max_length=255, null=True, blank=True)
 
     # def __str__(self):
     #     return self.

@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'trucks',
     'customers',
     'mainsite',
-    # 'notifications',
+    'notifications'
     # 'django_twilio'
 ]
 
