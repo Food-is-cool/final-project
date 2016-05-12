@@ -1,4 +1,5 @@
 Babel==2.3.4
+coverage==4.0.3
 dj-database-url==0.4.1
 Django==1.9.5
 django-bootstrap3==7.0.1
@@ -32,3 +33,4 @@ stripe==1.32.2
 twilio==5.4.0
 Werkzeug==0.11.5
 whitenoise==3.0
+yelp==1.0.2

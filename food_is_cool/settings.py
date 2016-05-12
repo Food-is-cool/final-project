@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'trucks',
     'customers',
     'mainsite',
+    'yelp',
+    'yelpapi'
     # 'notifications',
     # 'django_twilio'
 ]

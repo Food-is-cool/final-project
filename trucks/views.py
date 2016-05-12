@@ -1,14 +1,15 @@
 from django.contrib.auth.models import User, Group
 from django.http import HttpResponse
-from requests import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.views import APIView
-# from yelp.client import Client
 from trucks.models import TruckProfile
 from trucks.serializers import TruckProfileSerializer, TruckUserSerializer
-# from yelp.client import Client
-# from yelp.oauth1_authenticator import Oauth1Authenticator
+from yelp.client import Client
+from yelp.oauth1_authenticator import Oauth1Authenticator
+from yelpapi import YelpAPI
+from pprint import pprint
 
 class ListCreateTruckUser(generics.ListCreateAPIView):
     queryset=User.objects.all()
@@ -52,26 +53,50 @@ class DetailUpdateDeleteTruckProfile(generics.RetrieveUpdateDestroyAPIView):
     # TODO: change this ^ back to IsOwnerOrReadOnly
 
 
+class GetYelpRating(APIView):
+    # serializer_class = TruckProfileSerializer
+    yelp_api = YelpAPI(
+            consumer_key='4WE4WWqdHYTVcoBcVWSl1w',
+            consumer_secret='3ODmkPnLtpg4mfBF4EquRRY2Fgc',
+            token='A2RpqlpG-LGIYWLv8HRvn--idjrobz6_',
+            token_secret='e28huvUknMW-4eaEGTFrRt7PHlM'
+            )
 
-# class GetYelpRating(APIView):
+    def get(self, request, truck_id, format=None):
+        truck = TruckProfile.objects.get(id=truck_id)
+        id = truck.biz_id_yelp
+        response = self.yelp_api.business_query(id=id)
+        # id = 'sauced-las-vegas'
+        # response = 'https://api.yelp.com/v2/business/{}?actionlinks=True'.format(id)
+        return Response(response)
+
+# def get(self, request, format=None):
+        # client = Client(auth)
+        # # id = TruckProfile.biz_id_yelp
+        #
+        # return client.get_business('yelp-san-francisco')
+
+
+
+# def get(self, request, format=None):
 #
+#     # return HttpResponse('ok')
 #
-#     auth = Oauth1Authenticator(
-#         consumer_key='4WE4WWqdHYTVcoBcVWSl1w',
-#         consumer_secret='3ODmkPnLtpg4mfBF4EquRRY2Fgc',
-#         token='A2RpqlpG-LGIYWLv8HRvn--idjrobz6_',
-#         token_secret='e28huvUknMW-4eaEGTFrRt7PHlM'
-#         )
+#     params = {
+#         'lang': 'fr'
+#     }
 #
-#     client = Client(auth)
-#
-#     def get_queryset(self):
-#         return TruckProfile.objects.filter(user=self.request.user)
-#
-#     def get(self, format=None):
-#         x = self.request.user.truckprofile.yelp_biz_id
-#         result = 'https://api.yelp.com/v2/business/{}?actionlinks=True'.format(TruckProfile.yelp_biz_id)
-#         return result
+#         client.get_business('yelp-san-francisco', **params)
+
+
+
+    # def get_queryset(self):
+    #     return TruckProfile.objects.filter(user=self.request.user)
+    #
+    # def get(self, format=None):
+    #     x = self.request.user.truckprofile.yelp_biz_id
+    #     result = 'https://api.yelp.com/v2/business/{}?actionlinks=True'.format(TruckProfile.yelp_biz_id)
+    #     return result
 
 
 # class DetailCurrentTruck(generics.ListAPIView):
