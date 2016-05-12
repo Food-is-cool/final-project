@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
-
+from yelp.client import Client
+from yelp.oauth1_authenticator import Oauth1Authenticator
 import os
 # import sendgrid
 
@@ -171,3 +172,13 @@ CORS_ORIGIN_ALLOW_ALL = True
 # TWILIO_ACCOUNT_SID= os.environ.get('TWILIO_ACCOUNT_SID')
 # TWILIO_AUTH_TOKEN= os.environ.get('TWILIO_AUTH_TOKEN')
 # TWILIO_DEFAULT_CALLERID = 'Food is Cool'
+
+
+auth = Oauth1Authenticator(
+    consumer_key= '4WE4WWqdHYTVcoBcVWSl1w',
+    consumer_secret= '3ODmkPnLtpg4mfBF4EquRRY2Fgc',
+    token='A2RpqlpG-LGIYWLv8HRvn--idjrobz6_',
+    token_secret='e28huvUknMW-4eaEGTFrRt7PHlM'
+)
+
+client = Client(auth)

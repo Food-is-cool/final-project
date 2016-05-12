@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework import generics
 from rest_framework.views import APIView
+from yelp.client import Client
 
 from trucks.models import TruckProfile
 from trucks.serializers import TruckProfileSerializer, TruckUserSerializer
@@ -49,6 +50,15 @@ class DetailUpdateDeleteTruckProfile(generics.RetrieveUpdateDestroyAPIView):
     # TODO: change this ^ back to IsOwnerOrReadOnly
 
 
+
+class GetYelpRating(APIView):
+    queryset = TruckProfile.objects.all()
+
+    def get(self):
+        result = 'https://api.yelp.com/v2/business/{}?actionlinks=True'\
+            .format(TruckProfile.yelp_biz_id)
+
+        return result
 
 # class DetailCurrentTruck(generics.ListAPIView):
 #     serializer_class = TruckProfileSerializer
