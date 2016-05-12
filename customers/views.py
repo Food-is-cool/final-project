@@ -2,7 +2,6 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from django.contrib.auth.models import User, Group
 from rest_framework.views import APIView
-
 from customers.models import CustomerProfile
 from rest_framework import generics
 from customers.serializers import CustomerProfileSerializer, \
