@@ -7,8 +7,8 @@ from rest_framework.views import APIView
 from yelp.client import Client
 from trucks.models import TruckProfile
 from trucks.serializers import TruckProfileSerializer, TruckUserSerializer
-from yelp.client import Client
-from yelp.oauth1_authenticator import Oauth1Authenticator
+# from yelp.client import Client
+# from yelp.oauth1_authenticator import Oauth1Authenticator
 
 class ListCreateTruckUser(generics.ListCreateAPIView):
     queryset=User.objects.all()
