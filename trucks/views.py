@@ -9,7 +9,7 @@ from trucks.models import TruckProfile
 from trucks.serializers import TruckProfileSerializer, TruckUserSerializer
 # from yelp.client import Client
 # from yelp.oauth1_authenticator import Oauth1Authenticator
-# from yelpapi import YelpAPI
+from yelpapi import YelpAPI
 
 
 class ListCreateTruckUser(generics.ListCreateAPIView):
