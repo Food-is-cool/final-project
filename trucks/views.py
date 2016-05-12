@@ -1,12 +1,14 @@
 from django.contrib.auth.models import User, Group
 from django.http import HttpResponse
+from requests import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework import generics
 from rest_framework.views import APIView
 from yelp.client import Client
-
 from trucks.models import TruckProfile
 from trucks.serializers import TruckProfileSerializer, TruckUserSerializer
+from yelp.client import Client
+from yelp.oauth1_authenticator import Oauth1Authenticator
 
 class ListCreateTruckUser(generics.ListCreateAPIView):
     queryset=User.objects.all()
@@ -51,14 +53,26 @@ class DetailUpdateDeleteTruckProfile(generics.RetrieveUpdateDestroyAPIView):
 
 
 
-class GetYelpRating(APIView):
-    queryset = TruckProfile.objects.all()
+# class GetYelpRating(APIView):
+#
+#
+#     auth = Oauth1Authenticator(
+#         consumer_key='4WE4WWqdHYTVcoBcVWSl1w',
+#         consumer_secret='3ODmkPnLtpg4mfBF4EquRRY2Fgc',
+#         token='A2RpqlpG-LGIYWLv8HRvn--idjrobz6_',
+#         token_secret='e28huvUknMW-4eaEGTFrRt7PHlM'
+#         )
+#
+#     client = Client(auth)
+#
+#     def get_queryset(self):
+#         return TruckProfile.objects.filter(user=self.request.user)
+#
+#     def get(self, format=None):
+#         x = self.request.user.truckprofile.yelp_biz_id
+#         result = 'https://api.yelp.com/v2/business/{}?actionlinks=True'.format(TruckProfile.yelp_biz_id)
+#         return result
 
-    def get(self):
-        result = 'https://api.yelp.com/v2/business/{}?actionlinks=True'\
-            .format(TruckProfile.yelp_biz_id)
-
-        return result
 
 # class DetailCurrentTruck(generics.ListAPIView):
 #     serializer_class = TruckProfileSerializer

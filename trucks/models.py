@@ -6,7 +6,7 @@ class TruckProfile(models.Model):
     user = models.OneToOneField(User, related_name='truck_profile')
     is_truck = models.BooleanField(default=True)
     truck_name = models.CharField(max_length=255, null=True, blank=True)
-    truck_description = models.TextField(null=True, blank=True)
+    truck_description = models.CharField(max_length=255, null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
     expiration = models.DateTimeField(null=True, blank=True)
@@ -19,7 +19,8 @@ class TruckProfile(models.Model):
     logo_url = models.URLField(null=True, blank=True)
     cuisine = models.CharField(max_length=255, null=True, blank=True)
     specials = models.TextField(null=True, blank=True)
-    yelp_biz_id = models.CharField(max_length=250, null=True, blank =True)
+    yelp_biz_id = models.CharField(max_length=250, null=True, blank = True)
+    menu_items = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
