@@ -1,15 +1,14 @@
 from django.contrib.auth.models import User, Group
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.views import APIView
 from trucks.models import TruckProfile
 from trucks.serializers import TruckProfileSerializer, TruckUserSerializer
-from yelp.client import Client
-from yelp.oauth1_authenticator import Oauth1Authenticator
+# from yelp.client import Client
+# from yelp.oauth1_authenticator import Oauth1Authenticator
 from yelpapi import YelpAPI
-from pprint import pprint
 
 class ListCreateTruckUser(generics.ListCreateAPIView):
     queryset=User.objects.all()
