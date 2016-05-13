@@ -55,7 +55,6 @@ class DetailUpdateDeleteTruckProfile(generics.RetrieveUpdateDestroyAPIView):
 
 
 class GetYelpRating(APIView):
-    # serializer_class = TruckProfileSerializer
     yelp_api = YelpAPI(
             consumer_key='4WE4WWqdHYTVcoBcVWSl1w',
             consumer_secret='3ODmkPnLtpg4mfBF4EquRRY2Fgc',
@@ -67,9 +66,11 @@ class GetYelpRating(APIView):
         truck = TruckProfile.objects.get(id=truck_id)
         id = truck.biz_id_yelp
         response = self.yelp_api.business_query(id=id)
-        # id = 'sauced-las-vegas'
-        # response = 'https://api.yelp.com/v2/business/{}?actionlinks=True'.format(id)
         return Response(response)
+
+
+
+
 
 # def get(self, request, format=None):
         # client = Client(auth)
