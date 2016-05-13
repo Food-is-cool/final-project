@@ -1,9 +1,6 @@
-
-from django.shortcuts import render, render_to_response
-from django.http import HttpResponse, request
+from django.http import HttpResponse
 import sendgrid
 from customers.models import CustomerProfile
-from food_is_cool.settings import SENDGRID_API_KEY
 from notifications.models import EmailBlasts, SMSNotifications
 from twilio.rest import TwilioRestClient
 from django.conf import settings
@@ -23,14 +20,17 @@ def trigger_email_send(request, blast_id):
     email = EmailBlasts.objects.get(id=blast_id)
 
     customers = get_email_list()
+    results = [settings.SENDGRID_API_KEY]
     for customer in customers:
         message = sendgrid.Mail()
         message.add_to("daniel@roseman.org.uk")
         message.set_html("This is a test email")
         message.set_from("dhblodgett@gmail.com")
-        client.send(message)
+        status,msg = client.send(message)
+        results.append((status, msg))
         # TODO: Define this in settings later
-    return HttpResponse('{} messages sent'.format(customers.count()))
+    return HttpResponse(results)
+        # '{} messages sent'.format(customers.count()))
 
 # ===================== Send texts via Twilio ======================= #
 
