@@ -38,8 +38,8 @@ class TruckProfile(models.Model):
     item_6_price = models.FloatField(null=True, blank=True)
     item_7_price = models.FloatField(null=True, blank=True)
     item_8_price = models.FloatField(null=True, blank=True)
-    item_9_price = models.FloatField(null=True, blank=True)
-    item_10_price = models.FloatField(null=True, blank=True)
+    item_9_price = models.CharField(max_length=255, null=True, blank=True)
+    item_10_price = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 

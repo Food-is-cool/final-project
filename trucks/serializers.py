@@ -12,7 +12,6 @@ class TruckProfileSerializer(serializers.ModelSerializer):
         model = TruckProfile
         fields = '__all__'
 
-
 # class TruckLocationSerializer(ser)
 # truck id, lat, long
 
