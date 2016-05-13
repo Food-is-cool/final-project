@@ -29,7 +29,7 @@ class TruckProfile(models.Model):
     menu_item_7 = models.CharField(max_length=255, null=True, blank=True)
     menu_item_8 = models.CharField(max_length=255, null=True, blank=True)
     menu_item_9 = models.CharField(max_length=255, null=True, blank=True)
-    menu_item_10 = models.FloatField(max_length=255, null=True, blank=True)
+    menu_item_10 = models.CharField(max_length=255, null=True, blank=True)
     item_1_price = models.FloatField(null=True, blank=True)
     item_2_price = models.FloatField(null=True, blank=True)
     item_3_price = models.FloatField(null=True, blank=True)
