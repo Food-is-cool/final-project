@@ -54,7 +54,8 @@ def trigger_text_send(request, notification_id):
         message = client.messages.create(
             body= notification.text_content,
             to=customer.mobile_number,
-            from_="17029601952"
+            from_="17029601952",
+            media_url=notification.media_url
 
         )  #TODO: Define this in settings later
     return HttpResponse('{} messages sent'.format(customers.count()))
