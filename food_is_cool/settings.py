@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'customers',
     'mainsite',
     'notifications',
-    #'yelpapi',
+    'yelpapi',
     # 'django_twilio'
 ]
 
