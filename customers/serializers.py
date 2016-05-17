@@ -26,7 +26,6 @@ class CustomerUserSerializer(serializers.ModelSerializer):
         return user
 
 class LikedTruckSerializer(serializers.Serializer):
-
     truck_id = serializers.IntegerField(read_only=True)
     liked = serializers.NullBooleanField(read_only=True)
 
