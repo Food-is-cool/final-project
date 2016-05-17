@@ -1,32 +1,31 @@
 language: python
-
 python:
-    - 3.5.1
-
+- 3.5.1
 services:
-  - postgresql
-  - memcached
-
+- postgresql
+- memcached
 env:
-  - DJANGO=1.9.5
-  - DJANGO=1.9.4
-
+- DJANGO=1.9.5
+- DJANGO=1.9.4
 before_install:
-  - export DJANGO_SETTINGS_MODULE=food_is_cool.travis-settings
-  - export PYTHONPATH=$HOME/builds/davidbldogett/food_is_cool
-  - export PIP_USER_MIRRORS=true
-
+- export DJANGO_SETTINGS_MODULE=food_is_cool.travis-settings
+- export PYTHONPATH=$HOME/builds/davidbldogett/food_is_cool
+- export PIP_USER_MIRRORS=true
 install:
-  - pip install -r requirements.txt
-  - pip install django==$DJANGO --quiet
-  - pip install psycopg2 --quiet
-
+- pip install -r requirements.txt
+- pip install django==$DJANGO --quiet
+- pip install psycopg2 --quiet
 before_script:
-  - psql -c "CREATE DATABASE foodiscool;" -U postgres
-  - python manage.py migrate
-
+- psql -c "CREATE DATABASE foodiscool;" -U postgres
+- python manage.py migrate
 script:
-  - coverage run --source='.' manage.py test customers notifications trucks
-
+- coverage run --source='.' manage.py test customers notifications trucks
 after_success:
 - coveralls
+deploy:
+  provider: heroku
+  api_key:
+    secure: YOXtdn3quMAnQk4iMB/caEM+wLimYjclmCVGUzpaq43pvDh+Oeu4KmsgbCvRsd2B+tid5ysrR2nR/i+M2ce9MDv9UPv0o0Zln1aunLmnVSpjKMYyZ2X0iqcT/vL8kQW1PfwoIc6YI1AadSCufHUrzBT8f/uZoQv5DQqXuP4bKI/vOHI8VADrjDuH1IU1NltkMyRBlgKAgt6/twBGpgWXJUNF5q7/OOKRScpu8G/0/eMRQrDQHEO4g8ht6kKA6VDXUOyxEjnRMOfRkoPNfoSKA+NTzaNkK0NoCv6HPmt1AFxRnXo8/syFVdYGRHkm7F677/Ddxn/wwJqAqfGxwzElPZQZsSQNxXJbsnDrqTeokgVlk41toWc/VeVwnClwMZNl3n8m1eEJ1XqcZC091vElolIvCAJJ70l+X10T8cu5BIaVxSTNc36LYqDCn3FbSH8ineHSYF/coeHzqX+rxjDuvdosl0H4+iH2CQzYxOg2EhXnheT5dItc1lVUWUxf5jKfS6MXw2O74smYHzE5w071aBWD5vrC+BFsBaueswtYXVzx96Ny1BqN1Q/ZykY35zazsK//L7aK7AxHt3LJ4v88yRmeDDJIV2HELqFEfjQk0wXcv+X8vKOgJXDtzUOFMrygaBfEbFjcQTc2WcniI7sNJbDdfWCmA8kP4bhNBUEWNQc=
+  app: arcane-beach-47500
+  on:
+    repo: Food-is-cool/final-project
