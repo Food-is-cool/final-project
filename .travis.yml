@@ -12,7 +12,7 @@ env:
   - DJANGO=1.9.4
 
 before_install:
-  - export DJANGO_SETTINGS_MODULE=chirper.travis-settings
+  - export DJANGO_SETTINGS_MODULE=food_is_cool.travis-settings
   - export PYTHONPATH=$HOME/builds/davidbldogett/food_is_cool
   - export PIP_USE_MIRRORS=true
 
