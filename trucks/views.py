@@ -62,6 +62,8 @@ class GetYelpRating(APIView):
             token_secret='e28huvUknMW-4eaEGTFrRt7PHlM'
             )
 
+
+
     def get(self, request, truck_id, format=None):
         truck = TruckProfile.objects.get(id=truck_id)
         id = truck.biz_id_yelp
